@@ -3,6 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ffbe00</color>
-    <color name="fab_color_pressed">#3F51B5</color>
-    <color name="fab_color_normal">#303F9F</color>
+    <color name="fab_color_pressed">#ffcc33</color>
+    <color name="fab_color_normal">#ffbe00</color>
 </resources>
