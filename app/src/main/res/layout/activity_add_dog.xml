@@ -7,7 +7,19 @@
     android:background="@color/dark_background"
     android:orientation="vertical"
     tools:context="bikebus.dogdetective.AddDog">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report_dog"
+        android:textColor= "#eeeeee"
+        android:textSize="30sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +30,11 @@
             android:id="@+id/TopLeft"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_margin="20dp"
             android:background="@drawable/button_bg_round"
             android:padding="20dp"
-            android:layout_margin="20dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/dog8"
-            android:text="Round Button" />
+            android:src="@drawable/dog8" />
 
         <ImageButton
             android:id="@+id/TopRight"

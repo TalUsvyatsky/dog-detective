@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Dog Detective</string>
     <string name="title_activity_dog_map">Dog Detective</string>
+    <string name="report_dog">Spot a Dog</string>
 </resources>
