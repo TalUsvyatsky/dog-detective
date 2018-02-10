@@ -6,4 +6,5 @@
     <color name="fab_color_pressed">#ffcc33</color>
     <color name="fab_color_normal">#ffbe00</color>
     <color name="dark_background">#45688f</color>
+    <color name="dog1_pressed">#e687ceeb</color>
 </resources>

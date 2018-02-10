@@ -27,17 +27,18 @@
         android:gravity="center_horizontal">
 
         <ImageButton
-            android:id="@+id/TopLeft"
+            android:id="@+id/WhiteDogLightBlueBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="20dp"
             android:background="@drawable/button_bg_round"
             android:padding="20dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/dog8" />
+            android:src="@drawable/dog8"
+            />
 
         <ImageButton
-            android:id="@+id/TopRight"
+            android:id="@+id/TanDogGreenBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/button_bg_round_green"
@@ -54,7 +55,7 @@
 
 
         <ImageButton
-            android:id="@+id/MiddleLeft"
+            android:id="@+id/BrownDogYellowBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/button_bg_round_yellow"
@@ -65,7 +66,7 @@
             />
 
         <ImageButton
-            android:id="@+id/MiddleRight"
+            android:id="@+id/GrayDogDarkBlueBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/button_bg_round_dark_blue"
@@ -82,7 +83,7 @@
         android:gravity="center_horizontal">
 
         <ImageButton
-            android:id="@+id/BottomLeft"
+            android:id="@+id/BrownDogPurpleBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/button_bg_round_gray"
@@ -93,7 +94,7 @@
             android:layout_margin="20dp"/>
 
         <ImageButton
-            android:id="@+id/BottomRight"
+            android:id="@+id/GrayDogOrangeBack"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/button_bg_round_red"
