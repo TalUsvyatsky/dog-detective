@@ -1,8 +1,11 @@
 package bikebus.dogdetective;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -67,7 +70,15 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.plusButton);
+        ColorStateList rippleColor = ContextCompat.getColorStateList(this, R.color.fab_ripple_color);
+        fab.setBackgroundTintList(rippleColor);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DogMap.this, AddDog.class));
+            }
+        });
     }
 
     /**
@@ -201,4 +212,6 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
+
 }
