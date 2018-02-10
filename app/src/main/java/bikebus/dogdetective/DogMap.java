@@ -3,6 +3,8 @@ package bikebus.dogdetective;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -21,8 +23,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -109,6 +113,16 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+
+        mMap.addMarker(new MarkerOptions()
+                .title("DOG HERE")
+                .position(new LatLng(42.341889, -71.066444))
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog1",150,150))));
+        mMap.addMarker(new MarkerOptions()
+                .title("DOG HERE TOO")
+                .position(new LatLng(42.341889, -70.8888))
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog5",150,150))));
+
     }
 
     /**
@@ -213,5 +227,18 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
+
+    private void addMarker(double lat, double lon, String message) {
+
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(lat, lon))
+                .title(message));
+    }
+
+    private Bitmap resizeMapIcons(String iconName, int width, int height){
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(iconName, "drawable", getPackageName()));
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+        return resizedBitmap;
+    }
 
 }
