@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    android:orientation="vertical"
     tools:context="bikebus.dogdetective.AddDog">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/TopLeft"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round"
+            android:padding="20dp"
+            android:layout_margin="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog8"
+            android:text="Round Button" />
+
+        <ImageButton
+            android:id="@+id/TopRight"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round_green"
+            android:padding="20dp"
+            android:layout_margin="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+
+        <ImageButton
+            android:id="@+id/MiddleLeft"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round_yellow"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog4"
+            android:layout_margin="20dp"
+            />
+
+        <ImageButton
+            android:id="@+id/MiddleRight"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round_dark_blue"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog5"
+            android:text="Round Button"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/BottomLeft"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round_gray"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog6"
+            android:text="Round Button"
+            android:layout_margin="20dp"/>
+
+        <ImageButton
+            android:id="@+id/BottomRight"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_bg_round_red"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dog3"
+            android:text="Round Button"
+            android:layout_margin="20dp"/>
+
+    </LinearLayout>
+</LinearLayout>
