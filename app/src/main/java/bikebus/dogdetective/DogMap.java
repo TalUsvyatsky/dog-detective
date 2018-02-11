@@ -40,6 +40,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DogMap extends FragmentActivity implements OnMapReadyCallback {
 
@@ -253,11 +255,21 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-    private void addMarker(double lat, double lng, String message, int iconNumber) {
-        mMap.addMarker(new MarkerOptions()
+    private void addMarker(double lat, double lng, String message, int iconNumber, List<String> tags) {
+        String allTags = "";
+
+        for(String tag : tags) {
+            allTags += tag + " ";
+        }
+
+        MarkerOptions markerOptions = new MarkerOptions()
                 .title(message)
                 .position(new LatLng(lat, lng))
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog" + iconNumber, 150, 150))));
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog" + iconNumber, 150, 150)))
+                .snippet(allTags);
+
+
+        mMap.addMarker(markerOptions);
     }
 
     private Bitmap resizeMapIcons(String iconName, int width, int height) {
@@ -300,7 +312,11 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
                 Log.d(TAG, "onpost " + dogs.length() + " num of dogs");
                 for (int i = 0; i < dogs.length(); i++) {
                     JSONObject dog = dogs.getJSONObject(i);
-                    addMarker(dog.getDouble("lat"), dog.getDouble("lng"), "a dog", dog.getInt("icon"));
+                    LinkedList<String> tags = new LinkedList<>();
+                    tags.add("floof");
+                    tags.add("pup");
+                    addMarker(dog.getDouble("lat"), dog.getDouble("lng"), "a dog", dog.getInt("icon"),
+                            tags);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
