@@ -269,10 +269,6 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     // Get the dogs in the background
     class GetDogsTask extends AsyncTask<Void, Void, String> {
 
-        protected void onPreExecute() {
-
-        }
-
         protected String doInBackground(Void... urls) {
             // Do some validation here
 

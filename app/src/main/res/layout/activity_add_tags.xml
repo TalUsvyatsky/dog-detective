@@ -47,7 +47,6 @@
             android:layout_height="35sp"
             android:text="submit"
             android:backgroundTint="#70AD47"
-            android:onClick="findChosenTags"
             android:textColor="#ffffff"
             android:layout_margin="20dp"
             android:id="@+id/submitButton"
