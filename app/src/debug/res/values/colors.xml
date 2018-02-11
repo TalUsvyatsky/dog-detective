@@ -7,4 +7,6 @@
     <color name="fab_color_normal">#ffbe00</color>
     <color name="dark_background">#45688f</color>
     <color name="dog1_pressed">#e687ceeb</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
 </resources>

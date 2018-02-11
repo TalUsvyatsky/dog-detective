@@ -80,7 +80,16 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DogMap.this, AddDog.class));
+                Intent nextScreen = new Intent(DogMap.this, AddDog.class);
+                if(mLocationPermissionGranted) {
+                    nextScreen.putExtra("latitude", mLastKnownLocation.getLatitude());
+                    nextScreen.putExtra("longitude", mLastKnownLocation.getLongitude());
+                }
+                else {
+                    nextScreen.putExtra("latitude", mDefaultLocation.latitude);
+                    nextScreen.putExtra("longitude", mDefaultLocation.longitude);
+                }
+                startActivity(nextScreen);
             }
         });
     }
