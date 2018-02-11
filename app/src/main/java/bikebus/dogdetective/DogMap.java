@@ -1,21 +1,24 @@
 package bikebus.dogdetective;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -25,10 +28,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class DogMap extends FragmentActivity implements OnMapReadyCallback {
 
@@ -52,7 +63,6 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,18 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("REFRESH_DOG_MAP"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
     /**
      * Saves the state of the map when the activity is paused.
      */
@@ -114,14 +136,8 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
 
-        mMap.addMarker(new MarkerOptions()
-                .title("DOG HERE")
-                .position(new LatLng(42.341889, -71.066444))
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog1",150,150))));
-        mMap.addMarker(new MarkerOptions()
-                .title("DOG HERE TOO")
-                .position(new LatLng(42.341889, -70.8888))
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog5",150,150))));
+        // get the dogs
+        new GetDogsTask().execute();
 
     }
 
@@ -228,17 +244,72 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-    private void addMarker(double lat, double lon, String message) {
-
+    private void addMarker(double lat, double lng, String message, int iconNumber) {
         mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, lon))
-                .title(message));
+                .title(message)
+                .position(new LatLng(lat, lng))
+                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog" + iconNumber, 150, 150))));
     }
 
-    private Bitmap resizeMapIcons(String iconName, int width, int height){
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(iconName, "drawable", getPackageName()));
+    private Bitmap resizeMapIcons(String iconName, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return resizedBitmap;
     }
 
+    // Get the dogs in the background
+    class GetDogsTask extends AsyncTask<Void, Void, String> {
+
+        protected void onPreExecute() {
+
+        }
+
+        protected String doInBackground(Void... urls) {
+            // Do some validation here
+
+            try {
+                URL url = new URL("http://dog-detective.appspot.com/dog");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line).append("\n");
+                    }
+                    bufferedReader.close();
+                    return stringBuilder.toString();
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage(), e);
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            try {
+                mMap.clear();
+                JSONArray dogs = new JSONArray(response);
+                Log.d(TAG, "onpost " + dogs.length() + " num of dogs");
+                for (int i = 0; i < dogs.length(); i++) {
+                    JSONObject dog = dogs.getJSONObject(i);
+                    addMarker(dog.getDouble("lat"), dog.getDouble("lng"), "a dog", dog.getInt("icon"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Refresh dogs when we get a push message from firebase.
+    // We register this broadcast receiver to get triggered by intent with action "REFRESH_DOG_MAP"
+    // We send out that intent in NotificationMessageHandler
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            new GetDogsTask().execute();
+        }
+    };
 }
