@@ -52,6 +52,7 @@
             android:id="@+id/submitButton"
             />
         <ImageButton
+            android:id="@+id/superlikeButton"
             android:layout_width="40dp"
             android:background="@drawable/button_tag"
             android:layout_height="35sp"

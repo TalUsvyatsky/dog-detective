@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
 import com.google.android.flexbox.FlexboxLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,6 +74,40 @@ public class AddTags extends AppCompatActivity {
                     dogInfo.put("lat",lat);
                     dogInfo.put("lng",lng);
                     dogInfo.put("icon",icon);
+                    dogInfo.put("superlike",false);
+                    JSONArray jsonTags = new JSONArray();
+                    for(String s : tags) {
+                        jsonTags.put(s);
+                    }
+                    dogInfo.put("tags", jsonTags);
+                    new AddDogTask(dogInfo).execute();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Intent nextScreen = new Intent(AddTags.this, DogMap.class);
+                startActivity(nextScreen);
+            }
+        });
+        ImageButton superlike = (ImageButton)findViewById(R.id.superlikeButton);
+        superlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> tags = findChosenTags(v);
+                double lat = getIntent().getDoubleExtra("latitude",0);
+                double lng = getIntent().getDoubleExtra("longitude",0);
+                int icon = getIntent().getIntExtra("dog_clicked",1);
+                try {
+                    JSONObject dogInfo = new JSONObject();
+                    dogInfo.put("lat",lat);
+                    dogInfo.put("lng",lng);
+                    dogInfo.put("icon",icon);
+                    dogInfo.put("superlike",true);
+                    JSONArray jsonTags = new JSONArray();
+                    for(String s : tags) {
+                        jsonTags.put(s);
+                    }
+                    dogInfo.put("tags", jsonTags);
                     new AddDogTask(dogInfo).execute();
                 } catch (JSONException e) {
                     e.printStackTrace();

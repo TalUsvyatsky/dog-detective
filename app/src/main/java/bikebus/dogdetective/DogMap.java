@@ -40,8 +40,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 
 public class DogMap extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,7 +52,7 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private final LatLng mDefaultLocation = new LatLng(41.672198, -91.558923);
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 17;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
 
@@ -93,11 +91,10 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Intent nextScreen = new Intent(DogMap.this, AddDog.class);
-                if(mLocationPermissionGranted) {
+                if (mLocationPermissionGranted) {
                     nextScreen.putExtra("latitude", mLastKnownLocation.getLatitude());
                     nextScreen.putExtra("longitude", mLastKnownLocation.getLongitude());
-                }
-                else {
+                } else {
                     nextScreen.putExtra("latitude", mDefaultLocation.latitude);
                     nextScreen.putExtra("longitude", mDefaultLocation.longitude);
                 }
@@ -255,18 +252,13 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-    private void addMarker(double lat, double lng, String message, int iconNumber, List<String> tags) {
-        String allTags = "";
-
-        for(String tag : tags) {
-            allTags += tag + " ";
-        }
+    private void addMarker(double lat, double lng, String message, int iconNumber, String tags) {
 
         MarkerOptions markerOptions = new MarkerOptions()
                 .title(message)
                 .position(new LatLng(lat, lng))
                 .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("ic_dog" + iconNumber, 150, 150)))
-                .snippet(allTags);
+                .snippet(tags);
 
 
         mMap.addMarker(markerOptions);
@@ -312,11 +304,16 @@ public class DogMap extends FragmentActivity implements OnMapReadyCallback {
                 Log.d(TAG, "onpost " + dogs.length() + " num of dogs");
                 for (int i = 0; i < dogs.length(); i++) {
                     JSONObject dog = dogs.getJSONObject(i);
-                    LinkedList<String> tags = new LinkedList<>();
-                    tags.add("floof");
-                    tags.add("pup");
-                    addMarker(dog.getDouble("lat"), dog.getDouble("lng"), "a dog", dog.getInt("icon"),
-                            tags);
+                    JSONArray tags = dog.getJSONArray("tags");
+                    String tagString = "";
+                    String sep="";
+                    for (int t = 0; t < tags.length(); t++) {
+                        tagString+=sep;
+                        tagString+= tags.getString(t);
+                        sep=",";
+                    }
+                    addMarker(dog.getDouble("lat"), dog.getDouble("lng"), "G O O D B O Y E",
+                            dog.getInt("icon"), tagString);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
