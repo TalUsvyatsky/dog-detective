@@ -30,7 +30,7 @@ public class NotificationMessageHandler extends FirebaseMessagingService {
         if (data.containsKey("superlike") && data.get("superlike").equals("true")) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.mipmap.dog_1)
+                            .setSmallIcon(R.drawable.notif_icon)
                             .setContentTitle("DOGGO ALERT")
                             .setContentText("A dog has been superliked")
                             .setPriority(NotificationManager.IMPORTANCE_HIGH)
