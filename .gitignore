@@ -3,6 +3,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/.idea/*
 .DS_Store
 /build
 /captures
@@ -54,3 +55,5 @@ captures/
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuildexternalNativeBuild
+
+app/google-services.json
