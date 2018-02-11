@@ -30,8 +30,9 @@
         android:layout_height="wrap_content"
         app:flexDirection="row"
         app:flexWrap="wrap"
-        app:justifyContent="space_around"
-        android:id="@+id/flexbox">
+        app:justifyContent="space_between"
+        android:id="@+id/flexbox"
+        android:layout_margin="5dp">
 
     </com.google.android.flexbox.FlexboxLayout>
     <LinearLayout
@@ -45,14 +46,19 @@
             android:background="@drawable/button_tag"
             android:layout_height="35sp"
             android:text="submit"
-            android:backgroundTint="@color/fab_color_normal"
+            android:backgroundTint="#70AD47"
+            android:onClick="findChosenTags"
             android:textColor="#ffffff"
-            android:layout_margin="20dp"/>
-        <Button
-            android:layout_width="100dp"
+            android:layout_margin="20dp"
+            android:id="@+id/submitButton"
+            />
+        <ImageButton
+            android:layout_width="40dp"
             android:background="@drawable/button_tag"
             android:layout_height="35sp"
-            android:text="s"
+            android:src="@drawable/ic_star_rate_white_18dp"
+            android:backgroundTint="#00B0F0"
+            android:textColor="#ffffff"
             android:layout_margin="20dp"/>
     </LinearLayout>
 

@@ -31,37 +31,61 @@ public class AddDog extends AppCompatActivity {
         dog1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 1);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
         dog2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 2);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
         dog3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 3);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
         dog4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 4);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
         dog5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 5);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
         dog6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddDog.this, AddTags.class));
+                Intent nextScreen = new Intent(AddDog.this, AddTags.class);
+                nextScreen.putExtra("dog_clicked", 6);
+                nextScreen.putExtra("latitude", getIntent().getDoubleExtra("latitude", 0));
+                nextScreen.putExtra("longitude", getIntent().getDoubleExtra("longitude", 0));
+                startActivity(nextScreen);
             }
         });
     }

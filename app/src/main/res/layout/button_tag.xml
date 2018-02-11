@@ -4,14 +4,11 @@
     android:layout_height="wrap_content"
     android:paddingBottom="10dp">
 
-    <Button
-
+    <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="35sp"
-        android:textColor="@color/colorPrimaryDark"
-        style="?android:attr/borderlessButtonStyle"
-
-        android:background="@drawable/button_tag"
+        android:textColor="@color/button_text_color_selector"
+        android:background="@drawable/button_tag_selector"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:minWidth="0dp"
