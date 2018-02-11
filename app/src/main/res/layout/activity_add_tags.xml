@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context="bikebus.dogdetective.AddTags">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dog_tag_text"
+            android:textColor="#eeeeee"
+            android:textSize="30sp"
+            android:paddingBottom="20dp"/>
+    </LinearLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around"
+        android:id="@+id/flexbox">
+
+    </com.google.android.flexbox.FlexboxLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:background="@drawable/button_tag"
+            android:layout_height="35sp"
+            android:text="submit"
+            android:backgroundTint="@color/fab_color_normal"
+            android:textColor="#ffffff"
+            android:layout_margin="20dp"/>
+        <Button
+            android:layout_width="100dp"
+            android:background="@drawable/button_tag"
+            android:layout_height="35sp"
+            android:text="s"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+</LinearLayout>
