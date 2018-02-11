@@ -26,13 +26,18 @@ public class NotificationMessageHandler extends FirebaseMessagingService {
         in.setAction("REFRESH_DOG_MAP");
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(in);
         Map<String, String> data = remoteMessage.getData();
-        Log.d(TAG,data.toString());
+        Log.d(TAG, data.toString());
         if (data.containsKey("superlike") && data.get("superlike").equals("true")) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.mipmap.dog_1)
-                            .setContentTitle("Best boye spotted!")
-                            .setContentText("A dog has been superliked");
+                            .setContentTitle("DOGGO ALERT")
+                            .setContentText("A dog has been superliked")
+                            .setPriority(NotificationManager.IMPORTANCE_HIGH)
+                            .setDefaults(NotificationCompat.DEFAULT_ALL)
+                            .setAutoCancel(true)
+                            .setWhen(System.currentTimeMillis())
+                            .setTicker("DOGGO ALERT");
             Intent resultIntent = new Intent(this, DogMap.class);
             PendingIntent resultPendingIntent =
                     PendingIntent.getActivity(
